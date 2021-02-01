@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+        jenkins-server:
+                container_name: jenkins
+                image: jenkins/jenkins
+                ports:
+                        - "8080:8080"
+                        - "5000:5000"
+                volumes:
+                        - $PWD/jenkins_home:/var/jenkins_home
+                        - /var/run/docker.sock:/var/run/docker.sock
+                networks:
+                        net:
+                                ipv4_address: 172.18.18.9
+        
+
+networks:
+        net:
+                ipam:
+                        driver: default
+                        config: 
+                                - subnet: 172.18.18.0/24
